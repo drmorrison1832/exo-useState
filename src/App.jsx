@@ -4,12 +4,6 @@ import Interrupteur from "./components/Interrupteur";
 import Status from "./components/Status";
 
 function App() {
-  const [{ a, b }, { c, d }, { e, f }] = [
-    useState(1),
-    useState(1),
-    useState(1),
-  ];
-
   const [interrupteur0, setInterrupteur0] = useState(true);
   const [interrupteur1, setInterrupteur1] = useState(false);
   const [interrupteur2, setInterrupteur2] = useState(true);

@@ -1,6 +1,6 @@
 const Status = (props) => {
   const interrupteurs = props.status;
-  console.log(props);
+
   return (
     <>
       {" "}
