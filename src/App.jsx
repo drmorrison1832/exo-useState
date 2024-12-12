@@ -4,50 +4,33 @@ import Interrupteur from "./components/Interrupteur";
 import Status from "./components/Status";
 
 function App() {
-  const [interrupteur0, setInterrupteur0] = useState(true);
-  const [interrupteur1, setInterrupteur1] = useState(false);
-  const [interrupteur2, setInterrupteur2] = useState(true);
+  const mech = {};
 
-  const turnOnInterrupteur0 = () => setInterrupteur0(true);
-  const turnOffInterrupteur0 = () => setInterrupteur0(false);
+  // Je crée un objet que je vais passer aux composants
+  mech.int1 = useState(true); // [true, ƒ]
+  mech.int2 = useState(true);
+  mech.int3 = useState(true);
 
-  const turnOnInterrupteur1 = () => setInterrupteur1(true);
-  const turnOffInterrupteur1 = () => setInterrupteur1(false);
+  const switcher = (i) => {
+    let int = "int" + i; // Je crée le nom de la clé à switcher
+    mech[int][0] ? mech[int][1](false) : mech[int][1](true);
+  };
 
-  const turnOnInterrupteur2 = () => setInterrupteur2(true);
-  const turnOffInterrupteur2 = () => setInterrupteur2(false);
+  mech.switcher = switcher;
 
-  const interrupteurs = [interrupteur0, interrupteur1, interrupteur2];
-
-  const turnOnInterrupteurs = [
-    turnOnInterrupteur0,
-    turnOnInterrupteur1,
-    turnOnInterrupteur2,
-  ];
-  const turnOffInterrupteurs = [
-    turnOffInterrupteur0,
-    turnOffInterrupteur1,
-    turnOffInterrupteur2,
-  ];
+  // À chaque composant j'enverrai l'objet et, s'il le faut, le numéro d'interrupteur à traiter
+  // {int1: Array(2), int2: Array(2), int3: Array(2), switcher: ƒ}
 
   return (
     <>
-      <header>FUSÉE - Ready to go</header>
+      <header>DESSIN D'UNE FUSÉE - Ready to go</header>
       <main>
         <div className="interruteurs">
-          {interrupteurs.map((int, index) => {
-            return (
-              <div key={`interrupteur${index}`} className="interrupteur">
-                <Interrupteur
-                  interrupteur={interrupteurs[index]}
-                  turnOnInterrupteur={turnOnInterrupteurs[index]}
-                  turnOffInterrupteur={turnOffInterrupteurs[index]}
-                />
-              </div>
-            );
-          })}
+          <Interrupteur i="1" mech={mech} />
+          <Interrupteur i="2" mech={mech} />
+          <Interrupteur i="3" mech={mech} />
         </div>
-        <Status status={interrupteurs} />
+        <Status mech={mech} />
       </main>
     </>
   );
