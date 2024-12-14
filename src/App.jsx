@@ -13,7 +13,10 @@ function App() {
 
   const switcher = (i) => {
     let int = "int" + i; // Je crée le nom de la clé à switcher
-    mech[int][0] ? mech[int][1](false) : mech[int][1](true);
+    // mech[int][0] ? mech[int][1](false) : mech[int][1](true); // conditionnelle rédondante
+    mech[int][1]((prev) => {
+      return !prev;
+    });
   };
 
   mech.switcher = switcher;
